@@ -9,12 +9,15 @@ public class Inventario {
     }
 
     public void agregarCarta(Carta c){
+        if (carta == null || carta.getNombre().trim().isEmpty()) {
+            throw new IllegalArgumentException("La carta no puede ser nula ni tener nombre vacío.");
+        }
         cartas.add(c);
         System.out.println("Carta ´ "+ carta.getNombre()+ " ´ agregada.");
     }
 
     public void listarCartas(){
-        if (cartas == null){
+        if (cartas.isEmpty()){
             System.out.println("El inventario está vacío.");
         } else {
             System.out.println("Cartas en el inventario:");
@@ -26,8 +29,7 @@ public class Inventario {
 
     public void eliminarCarta(int i){
         if(i < 0 || i >= cartas.size()){
-            System.out.println("Indice fuera de rango.");
-            return;
+            throw new IndexOutOfBoundsException("Índice fuera de rango.");
         }
         Carta eliminada = cartas.remove(i);
         System.out.println("Carta ´ " + eliminada.getNombre() + " ´ eliminada.");
