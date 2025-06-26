@@ -8,13 +8,41 @@ public class Inventario {
         this.cartas = new ArrayList<>();
     }
 
-    public void agregarCarta(Carta c){
-        if (carta == null || carta.getNombre().trim().isEmpty()) {
-            throw new IllegalArgumentException("La carta no puede ser nula ni tener nombre vacío.");
+    private void agregarCarta() {
+        try {
+            System.out.print("Nombre: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Tipo (Esbirro, Hechizo, Arma, etc.): ");
+            String tipo = scanner.nextLine();
+
+            System.out.print("Clase (Mago, Guerrero, Neutral, etc.): ");
+            String clase = scanner.nextLine();
+
+            System.out.print("Costo de maná: ");
+            int costoMana = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Ataque: ");
+            int ataque = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Salud: ");
+            int salud = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Descripción: ");
+            String descripcion = scanner.nextLine();
+
+            System.out.print("Raridad (Común, Rara, Épica, Legendaria): ");
+            String raridad = scanner.nextLine();
+
+            Carta carta = new Carta(nombre, tipo, clase, costoMana, ataque, salud, descripcion, raridad);
+            inventario.agregarCarta(carta);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Debes ingresar un número válido para maná, ataque o salud.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        cartas.add(c);
-        System.out.println("Carta ´ "+ carta.getNombre()+ " ´ agregada.");
     }
+
 
     public void listarCartas(){
         if (cartas.isEmpty()){
